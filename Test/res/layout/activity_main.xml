@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btn01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="服务1" />
+
+    <Button
+        android:id="@+id/btn02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="服务2" />
+
+    <Button
+        android:id="@+id/btn03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="服务3" />
+
+    <Button
+        android:id="@+id/btn04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="服务1(新apk)" />
+
+    <Button
+        android:id="@+id/btn05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="卸载插件1" />
+
+        <Button
+        android:id="@+id/btn06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admob" />
+</LinearLayout>

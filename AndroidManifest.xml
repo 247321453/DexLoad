@@ -1,0 +1,25 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lody.plugin" >
+
+    <uses-sdk android:minSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application android:allowBackup="true" >
+        <activity
+            android:name="com.lody.plugin.LActivityProxy"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.lody.plugin.LActivityProxyMirror"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service android:name="com.lody.plugin.service.LProxyService" />
+        <service android:name="com.lody.plugin.service.LProxyService1" />
+        <service android:name="com.lody.plugin.service.LProxyService2" />
+        <service android:name="com.lody.plugin.service.LProxyService3" />
+        <service android:name="com.lody.plugin.service.LProxyServiceMirror" />
+    </application>
+
+</manifest>
