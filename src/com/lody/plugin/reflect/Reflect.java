@@ -1,5 +1,8 @@
 package com.lody.plugin.reflect;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -13,8 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import dalvik.system.DexClassLoader;
 
 /**
@@ -132,12 +133,12 @@ public class Reflect {
 	// 构造器
 	// ---------------------------------------------------------------------
 
-	private Reflect(Class<?> type) {
+	protected Reflect(Class<?> type) {
 		this.object = type;
 		this.isClass = true;
 	}
 
-	private Reflect(Object object) {
+    protected Reflect(Object object) {
 		this.object = object;
 		this.isClass = false;
 	}
