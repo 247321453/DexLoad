@@ -17,8 +17,9 @@ import android.text.TextUtils;
 
 /**
  * Created by lody on 2015/4/4. 文件工具类
+ * @hide
  */
-public class FileUtils {
+public class LFileUtils {
 
 	/**
 	 * 将流写入文件

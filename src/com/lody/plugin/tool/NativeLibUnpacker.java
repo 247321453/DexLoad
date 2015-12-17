@@ -1,5 +1,7 @@
 package com.lody.plugin.tool;
 
+import android.annotation.SuppressLint;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,8 +10,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-
-import android.annotation.SuppressLint;
 
 /**
  * Created by lody on 2015/4/4.
@@ -29,27 +29,27 @@ public class NativeLibUnpacker {
 		try {
 			ZipFile apk = new ZipFile(new File(apkPath));
 			int libs = deleteLibFile(apk, new File(toPath));
-			L.i("remove .so files by plugin:" + libs);
+			LLogUtil.i("remove .so files by plugin:" + libs);
 		} catch (Exception e) {
-			L.e(e.getMessage());
+			LLogUtil.e(e.getMessage());
 		}
 	}
 
 	public static void unPackSOFromApk(String apkPath, String toPath) {
 
-		L.i("CPU is " + ARCH);
+		LLogUtil.i("CPU is " + ARCH);
 
 		try {
 			ZipFile apk = new ZipFile(new File(apkPath));
 			boolean hasLib = extractLibFile(apk, new File(toPath));
 			if (hasLib) {
-				L.i("The plugin is contains .so files.");
+				LLogUtil.i("The plugin is contains .so files.");
 			} else {
-				L.i("The plugin isn't contain any .so files.");
+				LLogUtil.i("The plugin isn't contain any .so files.");
 			}
 
 		} catch (Exception e) {
-			L.e(e.getMessage());
+			LLogUtil.e(e.getMessage());
 		}
 
 	}
@@ -174,7 +174,7 @@ public class NativeLibUnpacker {
 				String name = libEntry.getName();
 				String pureName = name.substring(name.lastIndexOf('/') + 1);
 				File target = new File(to, pureName);
-				FileUtils.writeToFile(zip.getInputStream(libEntry), target);
+				LFileUtils.writeToFile(zip.getInputStream(libEntry), target);
 			}
 		}
 

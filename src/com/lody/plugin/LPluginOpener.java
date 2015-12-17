@@ -1,7 +1,7 @@
 package com.lody.plugin;
 
 import com.lody.plugin.service.LProxyService;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 
 import android.content.Context;
 import android.content.Intent;
@@ -119,14 +119,14 @@ public class LPluginOpener {
 		// apk
 		String _apk = LProxyService.getPluginPath(context, proxyService);
 		if (pluginPath.equalsIgnoreCase(_apk) && serviceName.equalsIgnoreCase(_class)) {
-			L.d("service is running...");
+			LLogUtil.d("service is running...");
 			try {
 				context.startService(new Intent(context, proxyService));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			L.d("service be start...");
+			LLogUtil.d("service be start...");
 			Intent i = new Intent(context, proxyService);
 			if (args != null) {
 				i.putExtras(args);

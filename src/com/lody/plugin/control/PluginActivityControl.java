@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 import com.lody.plugin.reflect.Reflect;
 import com.lody.plugin.reflect.ReflectException;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 
 import android.app.Activity;
 import android.app.Application;
@@ -76,7 +76,7 @@ public class PluginActivityControl implements PluginActivityCallback {
 			// Finals 修改以前的注入方式，采用原生的方式
 			Instrumentation instrumentation = proxyRef.get("mInstrumentation");
 			if(instrumentation==null){
-				L.e("instrumentation==null");
+				LLogUtil.e("instrumentation==null");
 			}
 			pluginRef.call(
 					// 方法名
@@ -114,7 +114,7 @@ public class PluginActivityControl implements PluginActivityCallback {
 
 			return true;
 		} catch (ReflectException e) {
-			L.e(e.getMessage());
+			LLogUtil.e(e.getMessage());
 			return false;
 		}
 

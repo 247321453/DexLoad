@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.lody.plugin.bean.LAPK;
 import com.lody.plugin.reflect.Reflect;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 import com.lody.plugin.tool.LPluginTool;
 import com.lody.plugin.tool.NativeLibUnpacker;
 
@@ -57,21 +57,21 @@ public final class LApkManager {
 		String apkPath = apk.pluginPath;
 		File file = new File(apkPath);
 		if (!file.exists()){
-			L.i("Not found Plugin on :" +  apkPath);
+			LLogUtil.i("Not found Plugin on :" + apkPath);
 			return false;
 		}
-		L.i("Init a plugin on" + apkPath);
+		LLogUtil.i("Init a plugin on" + apkPath);
 		try{
 		if (!apk.canUse()) {
-			L.i("Plugin is not been init,init it now！");
+			LLogUtil.i("Plugin is not been init,init it now！");
 			fillPluginInfo(apk, ctx);
 			fillPluginRes(apk, ctx);
 			fillPluginApplication(apk, ctx);
 		} else {
-			L.i("Plugin have been init.");
+			LLogUtil.i("Plugin have been init.");
 		}
 		}catch(Exception e){
-			L.e(e.getMessage());
+			LLogUtil.e(e.getMessage());
 			return false;
 		}
 		return true;
@@ -85,10 +85,10 @@ public final class LApkManager {
 		try {
 			info = LPluginTool.getAppInfo(ctx, apk.pluginPath);
 		} catch (PackageManager.NameNotFoundException e) {
-			L.e("PluginNotExistException:"+apk.pluginPath);
+			LLogUtil.e("PluginNotExistException:" + apk.pluginPath);
 		}
 		if (info == null) {
-			L.e("Can't create Plugin from :"+apk.pluginPath);
+			LLogUtil.e("Can't create Plugin from :" + apk.pluginPath);
 		}
 		apk.setPluginPkgInfo(info);
 		apk.setApplicationName(info.applicationInfo.className);
@@ -99,12 +99,12 @@ public final class LApkManager {
 			AssetManager assetManager = AssetManager.class.newInstance();
 			Reflect assetRef = Reflect.on(assetManager);
 			assetRef.call("addAssetPath", apk.pluginPath);
-			L.i("Assets = " + assetManager);
+			LLogUtil.i("Assets = " + assetManager);
 			apk.setPluginAssets(assetManager);
 
 			Resources pluginRes = new Resources(assetManager, ctx.getResources().getDisplayMetrics(),
 					ctx.getResources().getConfiguration());
-			L.i("Res = " + pluginRes);
+			LLogUtil.i("Res = " + pluginRes);
 			apk.setPluginRes(pluginRes);
 
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public final class LApkManager {
 
 		ClassLoader loader = apk.pluginLoader;
 		if (loader == null){
-			L.e("PluginCreateFailedException:Not found ClassLoader in plugin!");
+			LLogUtil.e("PluginCreateFailedException:Not found ClassLoader in plugin!");
 			return;
 		}
 		try {

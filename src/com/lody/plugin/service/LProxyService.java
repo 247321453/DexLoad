@@ -4,7 +4,7 @@ import com.lody.plugin.LProxyControl;
 import com.lody.plugin.bean.LServicePlugin;
 import com.lody.plugin.manager.LApkManager;
 import com.lody.plugin.reflect.Reflect;
-import com.lody.plugin.tool.Utils;
+import com.lody.plugin.tool.LPrefUtils;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -118,16 +118,16 @@ public class LProxyService extends Service {
 	}
 
 	public static void setPluginService(Context context, Class<?> _class, String apkPath, String serviceName) {
-		Utils.saveString(context, _class.getSimpleName() + ".SERVICE_APK_PATH", apkPath);
-		Utils.saveString(context, _class.getSimpleName() + ".SERVICE_CLASS_NAME", serviceName);
+		LPrefUtils.saveString(context, _class.getSimpleName() + ".SERVICE_APK_PATH", apkPath);
+		LPrefUtils.saveString(context, _class.getSimpleName() + ".SERVICE_CLASS_NAME", serviceName);
 	}
 
 	public static String getPluginPath(Context context, Class<?> _class) {
-		return Utils.loadString(context, _class.getSimpleName() + ".SERVICE_APK_PATH", null);
+		return LPrefUtils.loadString(context, _class.getSimpleName() + ".SERVICE_APK_PATH", null);
 	}
 
 	public static String getPluginService(Context context, Class<?> _class) {
-		return Utils.loadString(context, _class.getSimpleName() + ".SERVICE_CLASS_NAME", null);
+		return LPrefUtils.loadString(context, _class.getSimpleName() + ".SERVICE_CLASS_NAME", null);
 	}
 
 	@Override

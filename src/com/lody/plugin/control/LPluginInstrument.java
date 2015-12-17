@@ -2,7 +2,7 @@ package com.lody.plugin.control;
 
 import com.lody.plugin.LProxyControl;
 import com.lody.plugin.reflect.Reflect;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 
 import android.app.Activity;
 import android.app.Application;
@@ -44,7 +44,7 @@ public class LPluginInstrument extends Instrumentation {
 					.call("execStartActivity", who, contextThread, token, target, intent, requestCode, options).get();
 		}
 		LProxyControl.setActivity(who, intent, componentName.getClassName(), pluginPath);
-		L.i("Jump to " + componentName + "[" + pluginPath + "]");
+		LLogUtil.i("Jump to " + componentName + "[" + pluginPath + "]");
 		return instrumentRef.call("execStartActivity", who, contextThread, token, target, intent, requestCode, options)
 				.get();
 
@@ -62,7 +62,7 @@ public class LPluginInstrument extends Instrumentation {
 					.get();
 		}
 		LProxyControl.setActivity(who, intent, componentName.getClassName(), pluginPath);
-		L.i("Jump to " + componentName + "[" + pluginPath + "]");
+		LLogUtil.i("Jump to " + componentName + "[" + pluginPath + "]");
 		return instrumentRef.call("execStartActivity", who, contextThread, token, target, intent, requestCode).get();
 
 	}

@@ -13,7 +13,7 @@ import com.lody.plugin.manager.LApkManager;
 import com.lody.plugin.manager.LCallbackManager;
 import com.lody.plugin.manager.LPluginBugManager;
 import com.lody.plugin.service.LProxyService;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 import com.lody.plugin.tool.LPluginTool;
 
 import android.app.Activity;
@@ -71,22 +71,22 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 	@Override
 	public void fillPlugin(LActivityPlugin plugin) {
 		if (plugin == null) {
-			L.e("PluginNotExistException:Plugin is null!");
+			LLogUtil.e("PluginNotExistException:Plugin is null!");
 			return;
 		}
 		String apkPath = plugin.getPluginPath();
 		File apk = new File(apkPath);
 		if (!apk.exists()) {
-			L.e("NotFoundPluginException" + apkPath);
+			LLogUtil.e("NotFoundPluginException" + apkPath);
 			//不存在dex
 			return;
 		}
 		if (!this.remotePlugin.from().canUse()) {
-			L.i("Plugin is not been init,init it now！");
+			LLogUtil.i("Plugin is not been init,init it now！");
 			LApkManager.initApk(plugin.from(), this);
 			// remotePlugin.from().debug();
 		} else {
-			L.i("Plugin have been init.");
+			LLogUtil.i("Plugin have been init.");
 		}
 		fillPluginTheme(plugin);
 		fillPluginActivity(plugin);
@@ -101,8 +101,8 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 		PackageInfo packageInfo = plugin.from().pluginPkgInfo;
 		String mClass = plugin.getTopActivityName();
 
-		L.i("Before fill Plugin 's Theme,We check the plugin:info = " + packageInfo
-				+ "topActivityName = " + mClass);
+		LLogUtil.i("Before fill Plugin 's Theme,We check the plugin:info = " + packageInfo
+                + "topActivityName = " + mClass);
 
 		int defaultTheme = packageInfo.applicationInfo.theme;
 		ActivityInfo curActivityInfo = null;
@@ -111,10 +111,10 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 				curActivityInfo = a;
 				if (a.theme != 0) {
 					defaultTheme = a.theme;
-					L.i("Find theme=" + defaultTheme);
+					LLogUtil.i("Find theme=" + defaultTheme);
 				} else if (defaultTheme != 0) {
 					// ignore
-					L.i("Find theme : ignore");
+					LLogUtil.i("Find theme : ignore");
 				} else {
 					// 支持不同系统的默认Theme
 					if (Build.VERSION.SDK_INT >= 14) {
@@ -122,7 +122,7 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 					} else {
 						defaultTheme = android.R.style.Theme;
 					}
-					L.i("Find theme : defaultTheme");
+					LLogUtil.i("Find theme : defaultTheme");
 				}
 				break;
 			}
@@ -166,7 +166,7 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 			plugin.setCurrentPluginActivity(myPlugin);
 
 		} catch (Exception e) {
-			L.e(e.getMessage());
+			LLogUtil.e(e.getMessage());
 		}
 	}
 
@@ -196,24 +196,24 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 			pluginDexPath = pluginMessage.getString(LPluginConfig.KEY_PLUGIN_DEX_PATH,
 					LPluginConfig.DEF_PLUGIN_DEX_PATH);
 		} else {
-			L.e("PluginCreateFailedException:Please put the Plugin Path!");
+			LLogUtil.e("PluginCreateFailedException:Please put the Plugin Path!");
 			finish();
 			return;
 		}
-		L.d("pluginActivityName=" + pluginActivityName);
-		L.d("pluginDexPath=" + pluginDexPath);
+		LLogUtil.d("pluginActivityName=" + pluginActivityName);
+		LLogUtil.d("pluginDexPath=" + pluginDexPath);
 		if (pluginDexPath.equals(LPluginConfig.DEF_PLUGIN_DEX_PATH)) {
-			L.e("PluginCreateFailedException:Please put the Plugin Path!");
+			LLogUtil.e("PluginCreateFailedException:Please put the Plugin Path!");
 			finish();
 			return;
 		}
-		L.d("loadPlugin");
+		LLogUtil.d("loadPlugin");
 		remotePlugin = loadPlugin(LActivityProxy.this, pluginDexPath);
 
 		if (!pluginActivityName.equals(LPluginConfig.DEF_PLUGIN_CLASS_NAME)) {
 			remotePlugin.setTopActivityName(pluginActivityName);
 		}
-		L.d("fillPlugin");
+		LLogUtil.d("fillPlugin");
 		try {
 			fillPlugin(remotePlugin);
 		} catch (Exception e) {
@@ -223,7 +223,7 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 		}
 		// remotePlugin.from().debug();
 		if (this.getClass().getName().equals(pluginActivityName)) {
-			L.e("pluginActivityName==this");
+			LLogUtil.e("pluginActivityName==this");
 			finish();
 			return;
 		}
@@ -231,13 +231,13 @@ public class LActivityProxy extends Activity implements ILoadPlugin {
 				LActivityProxy.this,
 				remotePlugin.getCurrentPluginActivity(), remotePlugin.from().pluginApplication);
 		remotePlugin.setControl(control);
-		L.d("dispatchProxyToPlugin");
+		LLogUtil.d("dispatchProxyToPlugin");
 		if (!control.dispatchProxyToPlugin()) {
-			L.e("dispatchProxyToPlugin:fail");
+			LLogUtil.e("dispatchProxyToPlugin:fail");
 			finish();
 			return;
 		}
-		L.d("pluginActivity.onCreate");
+		LLogUtil.d("pluginActivity.onCreate");
 		try {
 			control.callOnCreate(savedInstanceState);
 			LCallbackManager.callAllOnCreate(savedInstanceState);

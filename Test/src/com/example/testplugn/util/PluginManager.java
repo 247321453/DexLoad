@@ -11,7 +11,7 @@ import com.lody.plugin.service.LProxyService1;
 import com.lody.plugin.service.LProxyService2;
 import com.lody.plugin.service.LProxyService3;
 import com.lody.plugin.service.LProxyServiceMirror;
-import com.lody.plugin.tool.FileUtils;
+import com.lody.plugin.tool.LFileUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -100,7 +100,7 @@ public class PluginManager {
 				String dataFile = getPluginFile(context, file);
 				File f = new File(dataFile);
 				if (!f.exists()) {
-					FileUtils.copyFile(new File(file), new File(dataFile));
+					LFileUtils.copyFile(new File(file), new File(dataFile));
 				} else {
 					LogUtil.e("插件已经存在:" + dataFile);
 				}

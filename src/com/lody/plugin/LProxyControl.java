@@ -1,6 +1,6 @@
 package com.lody.plugin;
 
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,10 +9,10 @@ import android.content.Intent;
 public class LProxyControl {
 
 	public static void setActivity(Context context, Intent intent, String activity, String dexPath) {
-		L.d("this=" + context.getClass());
+		LLogUtil.d("this=" + context.getClass());
 		ComponentName componentName = intent.getComponent();
 		if(Intent.ACTION_VIEW.equals(intent.getAction())){
-			L.i("no set:ACTION_VIEW");
+			LLogUtil.i("no set:ACTION_VIEW");
 			return;
 		}
 		if (componentName != null && (LActivityProxy.class.getName().equals(componentName.getClassName())
@@ -27,7 +27,7 @@ public class LProxyControl {
 			} else {
 				proxy = LActivityProxy.class.getName();
 			}
-			L.i("set LActivityProxy");
+			LLogUtil.i("set LActivityProxy");
 			intent.setClassName(context.getPackageName(), proxy);
 			intent.putExtra(LPluginConfig.KEY_PLUGIN_DEX_PATH, dexPath);
 			intent.putExtra(LPluginConfig.KEY_PLUGIN_ACT_NAME, activity);

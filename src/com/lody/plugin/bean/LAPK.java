@@ -1,7 +1,7 @@
 package com.lody.plugin.bean;
 
 import com.lody.plugin.manager.LPluginDexManager;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 
 import android.app.Application;
 import android.content.Context;
@@ -97,13 +97,13 @@ public class LAPK {
      * 仅供测试使用
      */
     public void debug(){
-        L.i("Plugin Path = " + pluginPath );
-        L.i("Plugin Resources = " + pluginRes);
-        L.i("Plugin Assets = " + pluginAssets);
-        L.i("Plugin Loader = " + pluginLoader);
-        L.i("Plugin PackageInfo = " + pluginPkgInfo);
-        L.i("Plugin Application name = " + applicationName);
-        L.i("Plugin Application = " + pluginApplication);
+        LLogUtil.i("Plugin Path = " + pluginPath);
+        LLogUtil.i("Plugin Resources = " + pluginRes);
+        LLogUtil.i("Plugin Assets = " + pluginAssets);
+        LLogUtil.i("Plugin Loader = " + pluginLoader);
+        LLogUtil.i("Plugin PackageInfo = " + pluginPkgInfo);
+        LLogUtil.i("Plugin Application name = " + applicationName);
+        LLogUtil.i("Plugin Application = " + pluginApplication);
     }
 
     /**

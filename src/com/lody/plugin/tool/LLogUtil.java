@@ -1,10 +1,13 @@
 package com.lody.plugin.tool;
 
-import com.lody.plugin.LPluginConfig;
-
 import android.util.Log;
 
-public class L {
+import com.lody.plugin.LPluginConfig;
+
+/**
+ * @hide
+ * */
+public class LLogUtil {
 	private static final String TAG= "LAPK";
 	private static final boolean IS_DEBUG = LPluginConfig.IS_DEBUG;
 	public static void v(String msg) {

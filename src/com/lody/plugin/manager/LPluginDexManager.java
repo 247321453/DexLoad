@@ -6,7 +6,7 @@ import android.os.Build;
 
 import com.lody.plugin.LPluginConfig;
 import com.lody.plugin.reflect.Reflect;
-import com.lody.plugin.tool.L;
+import com.lody.plugin.tool.LLogUtil;
 import com.lody.plugin.tool.NativeLibUnpacker;
 
 import java.util.Map;
@@ -60,7 +60,7 @@ public class LPluginDexManager extends DexClassLoader {
 				try {
 					Reflect.on(cxt.getClassLoader()).set("parent", pluginDexLoader);
 				} catch (Exception e) {
-					L.e(e.getMessage());
+					LLogUtil.e(e.getMessage());
 				}
 			}
 			pluginLoader.put(dexPath, pluginDexLoader);
@@ -84,10 +84,10 @@ public class LPluginDexManager extends DexClassLoader {
 			if (parent == null) {
 				parent = cxt.getClassLoader();
 			} else {
-				L.d("getSystemClassLoader");
+				LLogUtil.d("getSystemClassLoader");
 			}
 		} else {
-			L.d("currentActivityThread.getSystemContext");
+			LLogUtil.d("currentActivityThread.getSystemContext");
 		}
 		return parent;
 	}
