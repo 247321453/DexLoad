@@ -8,10 +8,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lody.plugin.api.LPluginConfig;
+import com.lody.plugin.api.LPluginDexManager;
 import com.lody.plugin.api.LProxyControl;
+import com.lody.plugin.api.NativeLibUnpacker;
 import com.lody.plugin.app.LProxyService;
 import com.lody.plugin.app.LProxyServiceMirror;
 import com.lody.plugin.bean.LPluginTool;
+
+import java.io.File;
 
 /**
  * Created by lody on 2015/3/24. Created by lody on 2015/3/24.
@@ -188,4 +192,24 @@ public class LPluginOpener {
     public static String getPluginService(Context context, Class<?> _class) {
         return LPluginTool.loadString(context, _class.getSimpleName() + ".SERVICE_CLASS_NAME", null);
     }
+
+
+    public static void removePlugin(Context context, String apkfile) {
+        try {
+            File file = new File(apkfile);
+            String name = file.getName();
+            int i = name.lastIndexOf(".");
+            if (i > 0) {
+                name = name.substring(0, i);
+            }
+            File dex = new File(LPluginDexManager.getPluginDir(context), name+".dex");
+            if(dex.exists()){
+                dex.delete();
+            }
+            NativeLibUnpacker.unPackSOFromApk(apkfile, LPluginDexManager.getPluginlibDir(context));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -35,24 +35,6 @@ public final class LApkManager {
 		return apk;
 	}
 
-	public static void remove(Context context, String apkfile) {
-		try {
-			File file = new File(apkfile);
-			String name = file.getName();
-			int i = name.lastIndexOf(".");
-			if (i > 0) {
-				name = name.substring(0, i);
-			}
-			File dex = new File(LPluginDexManager.getPluginDir(context), name+".dex");
-			if(dex.exists()){
-				dex.delete();
-			}
-			NativeLibUnpacker.unPackSOFromApk(apkfile, LPluginDexManager.getPluginlibDir(context));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static boolean initApk(LAPK apk, Context ctx) {
 		String apkPath = apk.pluginPath;
 		File file = new File(apkPath);

@@ -44,7 +44,7 @@ public class NativeLibUnpacker {
         }
 	}
 
-    /*package*/ static void unPackSOFromApk(String apkPath, String toPath) {
+    public static void unPackSOFromApk(String apkPath, String toPath) {
         if (BuildConfig.DEBUG)
             Log.i(LPluginConfig.TAG, "CPU is " + ARCH);
 		try {
