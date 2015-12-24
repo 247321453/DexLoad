@@ -1,13 +1,14 @@
 package com.lody.plugin.bean;
+
 import android.app.*;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.lody.plugin.manager.*;
+import com.lody.plugin.api.LApkManager;
 
-public class LServicePlugin
-{
-	/**
+public class LServicePlugin implements IPlugin {
+
+    /**
      * 插件所属apk
      */
     LAPK from;
@@ -23,7 +24,7 @@ public class LServicePlugin
      * 插件的第一个Service
      */
     private String topServiceName = null;
-    
+
     private Service defaultService;
 
     public LServicePlugin(Service proxyParent, String apkPath) {
@@ -34,72 +35,74 @@ public class LServicePlugin
         //可以通过from.canUse()来判断。
     }
 
-	public LAPK from()
-	{
-		return from;
-	}
-	/**
+    @Override
+    public LAPK from() {
+        return from;
+    }
+
+    /**
      * 设置代理的实体
      *
      * @param proxyParent
      */
-	public void setProxyParent(Service proxyParent)
-	{
-		this.proxyParent = proxyParent;
-	}
+    public void setProxyParent(Service proxyParent) {
+        this.proxyParent = proxyParent;
+    }
+
     /**
      * 得到代理的实体
      *
      * @return
      */
-	public Service getProxyParent()
-	{
-		return proxyParent;
-	}
+    public Service getProxyParent() {
+        return proxyParent;
+    }
 
-	public void setCurrentPluginService(Service currentPluginService)
-	{
-		CurrentPluginService = currentPluginService;
-	}
+    public void setCurrentPluginService(Service currentPluginService) {
+        CurrentPluginService = currentPluginService;
+    }
 
     /**
      * @return 当前的插件Service
      */
-	public Service getCurrentPluginService()
-	{
-		if(CurrentPluginService==null){
-			if(defaultService == null){
-		        defaultService = new Service() {
-					
-					@Override
-					public IBinder onBind(Intent intent) {
-						return null;
-					}
-				};
-			}
-			return defaultService;
-		}
-		return CurrentPluginService;
-	}
+    public Service getCurrentPluginService() {
+        if (CurrentPluginService == null) {
+            if (defaultService == null) {
+                defaultService = new Service() {
+
+                    @Override
+                    public IBinder onBind(Intent intent) {
+                        return null;
+                    }
+                };
+            }
+            return defaultService;
+        }
+        return CurrentPluginService;
+    }
+
     /**
      * 设置当前的插件Service
-	 *
      */
-	public void setTopServiceName(String topServiceName)
-	{
-		this.topServiceName = topServiceName;
-	}
+    public void setTopServiceName(String topServiceName) {
+        this.topServiceName = topServiceName;
+    }
 
-	public String getTopServiceName()
-	{
-		return topServiceName;
-	}
+    public String getTopServiceName() {
+        return topServiceName;
+    }
+
+    @Override
+    public String getPluginPath() {
+        return from.pluginPath;
+    }
 
     /**
      * 插件是否已经可以正常使用？
      *
      * @return
      */
+    @Override
     public boolean canUse() {
         return proxyParent != null && getCurrentPluginService() != null;
     }

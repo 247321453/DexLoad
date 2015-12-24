@@ -1,21 +1,22 @@
 package com.lody.plugin.bean;
 
-import com.lody.plugin.manager.LPluginDexManager;
-import com.lody.plugin.tool.LLogUtil;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.util.Log;
+
+import com.lody.plugin.BuildConfig;
+import com.lody.plugin.api.LPluginDexManager;
+import com.lody.plugin.api.LPluginConfig;
+
 import dalvik.system.DexClassLoader;
 
 /**
  * Created by lody  on 2015/4/6.
  */
 public class LAPK {
-
-    public static final String TAG = LAPK.class.getSimpleName();
 
     /**
      * 插件的Application名
@@ -97,13 +98,15 @@ public class LAPK {
      * 仅供测试使用
      */
     public void debug(){
-        LLogUtil.i("Plugin Path = " + pluginPath);
-        LLogUtil.i("Plugin Resources = " + pluginRes);
-        LLogUtil.i("Plugin Assets = " + pluginAssets);
-        LLogUtil.i("Plugin Loader = " + pluginLoader);
-        LLogUtil.i("Plugin PackageInfo = " + pluginPkgInfo);
-        LLogUtil.i("Plugin Application name = " + applicationName);
-        LLogUtil.i("Plugin Application = " + pluginApplication);
+        if (BuildConfig.DEBUG) {
+            Log.i(LPluginConfig.TAG, "Plugin Path = " + pluginPath);
+            Log.i(LPluginConfig.TAG, "Plugin Resources = " + pluginRes);
+            Log.i(LPluginConfig.TAG, "Plugin Assets = " + pluginAssets);
+            Log.i(LPluginConfig.TAG, "Plugin Loader = " + pluginLoader);
+            Log.i(LPluginConfig.TAG, "Plugin PackageInfo = " + pluginPkgInfo);
+            Log.i(LPluginConfig.TAG, "Plugin Application name = " + applicationName);
+            Log.i(LPluginConfig.TAG, "Plugin Application = " + pluginApplication);
+        }
     }
 
     /**

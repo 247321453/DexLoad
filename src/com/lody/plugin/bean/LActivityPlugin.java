@@ -3,13 +3,13 @@ package com.lody.plugin.bean;
 import android.app.Activity;
 import android.content.res.Resources;
 
-import com.lody.plugin.control.PluginActivityControl;
-import com.lody.plugin.manager.LApkManager;
+import com.lody.plugin.api.PluginActivityControl;
+import com.lody.plugin.api.LApkManager;
 
 /**
  * Created by lody  on 2015/3/27.
  */
-public class LActivityPlugin {
+public class LActivityPlugin implements IPlugin {
     /**
      * 插件所属apk
      */
@@ -91,6 +91,7 @@ public class LActivityPlugin {
      *
      * @return 插件所在路径
      */
+    @Override
     public String getPluginPath() {
         return from.pluginPath;
     }
@@ -128,10 +129,12 @@ public class LActivityPlugin {
      *
      * @return
      */
+    @Override
     public boolean canUse() {
         return proxyParent != null && getCurrentPluginActivity() != null;
     }
 
+    @Override
     public LAPK from(){
         return from;
     }
