@@ -19,7 +19,7 @@ public final class LProxyServiceMirror extends LProxyService {
 			//不存在这个类
 		}
 		// 设置代理服务
-		Class<?> freeservice = LProxyService.class;
+		Class<?> freeservice = LPluginOpener.getService(this, sSERVICE_APK_PATH, serviceName, true);
 		service.setClass(this, freeservice);
 		super.stopService(service);
         LPluginOpener.setPluginService(this, freeservice, sSERVICE_APK_PATH, serviceName);
