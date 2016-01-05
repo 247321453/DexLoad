@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.lody.plugin.BuildConfig;
-import com.lody.plugin.api.LPluginConfig;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -32,7 +31,7 @@ public class NativeLibUnpacker {
 
     private static String ARCH = System.getProperty("os.arch");
 
-	/*package*/ static void deleteSOFromApk(String apkPath, String toPath) {
+	public static void deleteSOFromApk(String apkPath, String toPath) {
 		try {
 			ZipFile apk = new ZipFile(new File(apkPath));
 			int libs = deleteLibFile(apk, new File(toPath));
@@ -113,7 +112,7 @@ public class NativeLibUnpacker {
 		int libs = 0;// 是否包含so
 		if (libEntries != null) {
 			if (!to.exists()) {
-				to.mkdirs();
+				return libs;
 			}
 			for (ZipEntry libEntry : libEntries) {
 				String name = libEntry.getName();

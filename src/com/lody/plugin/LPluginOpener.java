@@ -206,7 +206,7 @@ public class LPluginOpener {
             if(dex.exists()){
                 dex.delete();
             }
-            NativeLibUnpacker.unPackSOFromApk(apkfile, LPluginDexManager.getPluginlibDir(context));
+            NativeLibUnpacker.deleteSOFromApk(apkfile, LPluginDexManager.getPluginlibDir(context));
         } catch (Exception e) {
             e.printStackTrace();
         }
