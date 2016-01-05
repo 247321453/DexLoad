@@ -653,7 +653,7 @@ import dalvik.system.DexClassLoader;
             this.clsName = cls;
         }
         public NULL(Reflect cls) {
-            this.clsName = cls.get();
+            this.clsName = cls.get().getClass();
         }
         public Class<?> clsName;
     }
