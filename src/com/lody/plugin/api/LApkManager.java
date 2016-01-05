@@ -10,8 +10,8 @@ import android.util.Log;
 
 import com.lody.plugin.BuildConfig;
 import com.lody.plugin.bean.LAPK;
-import com.lody.plugin.bean.Reflect;
 import com.lody.plugin.bean.LPluginTool;
+import com.lody.plugin.bean.Reflect;
 
 import java.io.File;
 import java.util.Map;

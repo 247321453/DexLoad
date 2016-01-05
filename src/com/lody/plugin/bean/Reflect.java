@@ -24,7 +24,7 @@ import dalvik.system.DexClassLoader;
  *
  * @author lody
  */
-public class Reflect {
+ public class Reflect {
 
 	/**
 	 * 封装Class.forName(name)
